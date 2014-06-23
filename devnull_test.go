@@ -28,10 +28,13 @@ func TestWriter(t *testing.T) {
   }
 }
 
-var oneMiB = make([]byte, 1024*1024)
+const oneMiB = 1024 * 1024
+
+var oneMiBBuf = make([]byte, oneMiB)
 
 func BenchmarkWriter1MiB(b *testing.B) {
+  b.SetBytes(oneMiB)
   for i := 0; i < b.N; i++ {
-    Writer.Write(oneMiB)
+    Writer.Write(oneMiBBuf)
   }
 }
